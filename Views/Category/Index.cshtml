@@ -4,30 +4,65 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Category Master</h1>
-<table>
-    <tr>
-        <td>
-            <a asp-controller="Category" asp-action="Create">Create New Category</a>
-        </td>
-</tr>
-</table>
-<table style="width:550px; border:2px solid">
-    <tr style="border: 2px solid">
-        <td style="width:200px"><b>Category Name</b></td>
-        <td style="width:200px"><b>Display Order</b></td>
-        <td><b>Action</b></td>
-    </tr>
-    @foreach (var obj in Model)
-    {
-        <tr>
-            <td style="width:200px">@obj.Name</td>
-            <td style="width:200px">@obj.DisplayOrder</td>
-            <td>
-                <a asp-asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
-                <a asp-asp-controller="Category" asp-action="Delete" class="text-danger" asp-route-id="@obj.Id">Delete</a>
-            </td>
-        </tr>
-    }
+<div class="container">
+    <div class="row">
+        <h1>Category Master</h1>
 
-</table>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <a class="btn btn-sm btn-primary m-2 p-2 float-left" asp-controller="Category" asp-action="Create">Create New Category</a>
+                </div>
+                <div class="col-6">
+                    <input type="text" placeholder="Search here.." id="searchInput" class="form-control m-1 float-end" style="width:50%" />
+                </div>
+            </div>
+            <table class="table table-bordered text-center">
+                <thead class=" bg-secondary text-white">
+                    <tr>
+                        <th style="width:200px"><b>Category Name</b></th>
+                        <th style="width:200px"><b>Display Order</b></th>
+                        <th><b>Action</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td style="width:200px">@obj.Name</td>
+                            <td style="width:200px">@obj.DisplayOrder</td>
+                            <td>
+                                <a asp-asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id">Edit</a>
+                                <a asp-asp-controller="Category" asp-action="Delete" class="text-danger" asp-route-id="@obj.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tr style="border: 1px solid">
+                </tr>
+               
+
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            // Capture keyup event on search input
+            $('#searchInput').keyup(function () {
+                var searchQuery = $(this).val().toLowerCase(); // Get the search query value
+                $('tbody tr').each(function () {
+                    var text = $(this).text().toLowerCase(); // Get the text within each item
+                    // Show or hide item based on the search query
+                    if (text.indexOf(searchQuery) !== -1) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+}

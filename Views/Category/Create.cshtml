@@ -1,38 +1,42 @@
 ﻿@model Category
 
-<form method="post">
-    <table>
-        <tr>
-            <td>
-                <label asp-for="Name"></label>
-            </td>
-            <td>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </td>
-        </tr>
+<div class="card">
+    <form method="post">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    <label asp-for="Name"></label>
+                </th>
+                <td>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </td>
+            </tr>
 
-        <tr>
-            <td>
-                <label asp-for="DisplayOrder"></label>
+            <tr>
+                <th>
+                    <label asp-for="DisplayOrder"></label>
 
-            </td>
-            <td>
-                <input asp-for="DisplayOrder" class="form-control" />
-                <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Create</button>
-                <a asp-controller="Category" asp-action="Index">Back to List</a>
+                </th>
+                <td>
+                    <input asp-for="DisplayOrder" class="form-control" />
+                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                </td>
+            </tr>
 
-            </td>
-        </tr>
-        @*<tr>
+            @*<tr>
             <td colspan="2">
-                <div asp-validation-summary="All"></div>
+            <div asp-validation-summary="All"></div>
             </td>
-        </tr>*@
-    </table>
-</form>
+            </tr>*@
+        </table>
+        <div class="col-md-12 pt-2">
+            <button type="submit" class="btn btn-sm btn-primary m-2 p-2 float-left" onclick="return ValidateInput()">
+                Create
+            </button>
+            <a asp-action="Index" asp-controller="Category" class="btn btn-warning m-2 p-2 float-end">
+                Back to List
+            </a>
+        </div>
+    </form>
+</div>
